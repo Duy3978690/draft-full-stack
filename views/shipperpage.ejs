@@ -1,0 +1,14 @@
+<%= user.assignedDistributionHub.name %> <br>
+<%= user.assignedDistributionHub.address %> <br>
+
+<% orders.forEach(function(order) { %>
+    <% if (order.status === "Active") { %>
+        <p><%= order._id %></p>
+        <form action="/status/<%= order._id %>" method="post">
+            <button type="submit" name="status" value="Delivered">Delivered</button>
+            <button type="submit" name="status" value="Canceled">Canceled</button>
+        </form>
+        <a href="/order/<%= order._id %>">View order</a>
+    <% } %>
+<% }); %>
+

@@ -1,0 +1,16 @@
+<h1>Orders</h1>
+<div>
+    customer name: <%= order.customer.name %>
+</div>
+
+<div>
+    customer address: <%= order.customer.address %>
+</div>
+<div>
+    <% order.products.forEach((productEntry) => { %>
+        <img src="/<%= productEntry.product.productImage %>" alt="product image" width="100px">
+        <%= productEntry.product.name %>
+    <% }) %>
+</div>
+
+

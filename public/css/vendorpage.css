@@ -1,0 +1,250 @@
+ * {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,Helvetica Neue,Helvetica,sans-serif
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 0;
+    position: sticky;
+    top: 0; 
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+}
+.logo img {
+    height: 3em;
+    padding-left: 50%;
+}
+
+.nav-items li {
+    display: inline-block;
+    list-style: none;
+    padding-left: 10%;
+}
+
+.nav-items li a {
+    text-decoration: none;
+    color: #9e9e9e;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nav-items li a:hover {
+    color: #f57224;
+    transition: all 0.25s ease;
+}
+
+/* sidebar */
+.sidenav{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    overflow-x:hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    background-color:#000083;
+}
+.sidenav a{
+    padding: 8px 8px 8px 32px;
+    display: block;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    transition: 0.3s;
+}
+span{
+    font-size: 50px;
+    cursor: pointer;
+    color: #000083;
+}
+.sidenav a:hover{
+    color: #ed6600;
+}
+.sidenav .closebtn{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 35px;
+    margin-left:50px;
+}
+
+/* Main */
+body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+main{
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+.page-title .title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Product detail */
+.box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    float: right;
+    width: 100%;
+}
+.box{
+    flex: 1 1 300px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, .3);
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
+}
+.box .img{
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+}
+.box .img img{
+    height: 200px;
+    width: 250px;
+    object-fit: cover;
+}
+.box .info .sub-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-top: 1px solid rgba(0, 0, 0, .3);
+}
+.box .info h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: #000083;
+    font-size: 20px;
+}
+.box .info .sub-info .price{
+    color: #ED6600;
+    font-size: 20px;
+}
+
+/* Footer */
+footer {
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f5f5f5;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding-top: 10%;
+    z-index: 2;
+}
+
+.left .footer-items li {
+    list-style: none;
+}
+
+.left .footer-items li a{
+    text-decoration: none;
+    color: #0f146d;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.left .footer-items li a:hover{
+    text-decoration: underline;
+}
+
+.social-media-icons a i {
+    font-size: 20px;
+    color: black;
+}
+
+/* Add new Product */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* media */
+@media (max-width: 768px){
+    .page-title .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo img{
+        height: 2.9em;
+        padding-left: 4%;
+    }
+    .sidebar{
+        width: 10%;
+    }
+    .right h1{
+        font-size: 1em;
+    }
+    .product-form h2{
+        padding: 0 auto;
+        margin: 0 auto;
+    }
+    .product-form{
+        padding-left: 2%;
+    }
+    body{
+        width: 100%;
+        height: 100%;
+    }
+    footer{
+        display: flex;
+        padding-top: 50%;
+    }
+}
+@media (min-width: 360px) and (max-width:740px){
+    .logo img{
+        height: 2.6em;
+    }
+}
+
+@media (max-width: 992px){
+    .page-title .title{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-form .mx-auto{
+        width: 100%;
+        height: 100%;
+    }
+    footer{
+        display: flex;
+        padding-top: 70%;
+    }
+}

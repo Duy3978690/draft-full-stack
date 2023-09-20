@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/js/script.js">
+    <title>Sign Up</title>
+</head>
+<body>
+  <main >
+    <header>
+      <%- include('./partials/header.ejs') %>
+  </header>
+    <div class="container">
+        <div class="usertype">
+            <p>User type:</p>
+            <a href="/signup">Custumer</a>
+            <a href="/signup/vendor">Vendor</a>
+            <a href="/signup/shipper">Shipper</a>
+        </div>
+        <div class="extra">
+            <p>Have an account? <a href="/login">Log in</a></p>
+        </div>
+        <div>
+            <h1>Register your account</h1>
+        </div>
+      <form action="/signup" method="post" enctype="multipart/form-data">
+        <div>
+          <div class="form-group">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+            <% if (req.query.error === 'userNameAlreadyTaken') { %>
+              <p class="error-text">Username is already taken</p>
+              <script>
+                  // Use JavaScript to remove the query parameter from the URL after rendering the error message
+                  const url = new URL(window.location.href);
+                  url.searchParams.delete('error');
+                  window.history.replaceState({}, document.title, url);
+              </script>
+              <% } %>
+            </div>
+            <div class="form-group">
+              <label for="password"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="image"><b>Choose your profile picture</b></label>
+              <input type="file" name="image" accept=".jpg, .jpeg, .png" required>
+          </div>
+        </div>
+        <div class="vl">
+        </div>
+        <div>
+          <div class="form-group">
+              <label for="name"><b>Your name</b></label>
+              <input type="text" placeholder="Enter your name" name="name" required>
+          </div>
+          <div class="form-group">
+              <label for="address"><b>Your address</b></label>
+              <input type="text" placeholder="Enter your address" name="address" required>
+          </div>
+          <div class="form-group">
+              <button type="submit">Submit</button>
+              <button type="reset">Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+  <footer>
+    <%- include('./partials/footer.ejs') %>
+  </footer>
+</body>
+</html>

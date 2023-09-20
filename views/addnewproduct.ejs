@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <link rel="stylesheet" href="vendorpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <a class="logo" href=""><img src="img/TB1T7K2d8Cw3KVjSZFuXXcAOpXa.png" alt="logo"></a>
+        <nav>
+            <ul class="nav-items">
+                <li><a href="">HOME</a></li>
+                <li><a href="">LOGIN</a></li>
+                <li><a href="">MY ACCOUNT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div aria-label="breadcrumb">
+        <ol class="breadcrumb p-1">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="vendorpage.html">Vendor Page</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add New Product</li>
+        </ol>
+    </div>
+
+    <!-- Main -->
+    <main>
+        <div class="product-form p-2">
+            <h2 class="page-title">Add New Product</h2>
+            <form id="productForm" class="mx-auto" style="width: 50%;">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" required>
+                
+                <label for="productDesc">Description:</label>
+                <textarea id="productDesc" required></textarea>
+                
+                <label for="productPrice">Price:</label>
+                <input type="number" id="productPrice" step="0.01" required placeholder="$">
+                <!-- Upload file -->
+                <label for="uploadPhoto">Upload Photo:</label>
+                <input type="file" id="photoUpload">
+            
+                <button type="submit" class="btn btn-primary mx-auto m-3 d-flex align-items-center justify-content-center">
+                Add Product</button>
+                
+                
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="left">
+            <ul class="footer-items">
+                <li><a href="">ABOUT</a></li>
+                <li><a href="">COPYRIGHT</a></li>
+                <li><a href="">PRIVACY</a></li>
+                <li><a href="">HELP</a></li>
+            </ul>
+        </div>
+        <div class="right">
+            <div><h1>Connect with us</h1></div>
+            <div class="social-media-icons">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href=""><i class="fa-brands fa-instagram"></i></a>
+                <a href=""><i class="fa-brands fa-github"></i></a>
+                <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <div><p>© Lazada 2023</p></div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

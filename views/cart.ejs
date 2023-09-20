@@ -1,0 +1,22 @@
+<%- include('./partials/header.ejs') %>
+
+<div>
+    <% cartItems.forEach(function(cartItem) { %>
+        <%= cartItem.product.name %>
+        <%= cartItem.product.price %>
+        <img src="<%= cartItem.product.productImage %>" alt="product image">
+        <form action="/remove/<%= cartItem.product._id %>" method="post">
+            <button type="submit">Remove</button>
+        </form>
+    <% }); %>
+</div>
+
+<% if (cartItems.length > 0) { %>
+    <form action="/order" method="post">
+        <button type="submit">Order</button>
+    </form>
+<% } else{ %>
+    <p>No products in the cart to create an order.</p>
+<% } %>
+
+<%- include('./partials/footer.ejs') %>

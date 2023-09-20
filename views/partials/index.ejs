@@ -1,0 +1,21 @@
+<!-- Main -->
+<main>
+    <input type="text" class="form-control mt-3 mx-auto" id="myinput" placeholder="Search your Product here..." style="width: 30%;">
+
+    <div class="container">
+        <h3 class="text-danger mt-5 text-center" id="para" style="display: none;">Not Found</h3>
+        <div class="row" id="card">
+            <% products.forEach((product) => { %>
+                <div class="col-md-4 mt-3 mb-3">
+                    <div class="card p-3 ps-5 pe-5">
+                        <h4 class="text-capitalize text-center"><%= product.name %></h4>
+                        <img src="<%=product.productImage%>" width="100%" height="320px">
+                        <p class="mt-2"><%= product.price %>$</p>
+                        <a href="/productdetails/<%= product.id %>"><button class="btn btn-primary w-100 mx-auto"></button>More</button></a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</main>
+<script src="/js/script.js"></script>
