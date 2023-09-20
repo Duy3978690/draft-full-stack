@@ -1,6 +1,14 @@
 <!-- Main -->
 <main>
-    <input type="text" class="form-control mt-3 mx-auto" id="myinput" placeholder="Search your Product here..." style="width: 30%;">
+    <form action="/" method="get">
+        <input type="text" class="form-control mt-3 mx-auto" id="myinput" name="searchQuery" placeholder="Search your Product here..." style="width: 30%;">
+        <div>
+            <input type="number" name="minPrice" placeholder="Minimum Price">
+            <input type="number" name="maxPrice" placeholder="Maximum Price">
+            <button type="submit" class="btn btn-primary mt-3">Filter/Search</button>
+        </div>
+        
+    </form>
 
     <div class="container">
         <h3 class="text-danger mt-5 text-center" id="para" style="display: none;">Not Found</h3>

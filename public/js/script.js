@@ -1,21 +1,16 @@
-// document.getElementById("myinput").addEventListener("keyup", function() {
-//     let text = this.value.toLowerCase();
+// Check if the URL contains query parameters
+const url = new URL(window.location.href);
+const searchQuery = url.searchParams.get('searchQuery');
+const minPrice = url.searchParams.get('minPrice');
+const maxPrice = url.searchParams.get('maxPrice');
 
-//     // Send a GET request to /filter-gallery with the search text
-//     fetch(`/filter-gallery?text=${text}`)
-//         .then(response => response.text())
-//         .then(data => {
-//             // Replace the card container with the filtered gallery
-//             const cardContainer = document.getElementById("card");
-//             if (data.trim() === "") {
-//                 // Show "Not Found" message if data is empty
-//                 document.getElementById("para").style.display = "block";
-//                 cardContainer.innerHTML = "";
-//             } else {
-//                 // Hide "Not Found" message if data is not empty
-//                 document.getElementById("para").style.display = "none";
-//                 cardContainer.innerHTML = data;
-//             }
-//         })
-//         .catch(error => console.error(error));
-// });
+// Check if any of the query parameters are present and not empty
+if (searchQuery || minPrice || maxPrice) {
+    // Clear the query parameters
+    url.searchParams.delete('searchQuery');
+    url.searchParams.delete('minPrice');
+    url.searchParams.delete('maxPrice');
+
+    // Replace the URL without query parameters
+    window.history.replaceState({}, document.title, url);
+}

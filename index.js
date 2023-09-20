@@ -103,10 +103,40 @@ function isAuthenticated(req, res, next) {
     }
 }
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {     
+        cb(null, "uploads")
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, file.fieldname + '-' + uniqueSuffix + ".png")
+    }
+})
+  
+const upload = multer({ storage: storage })
+
 // index route
 app.get('/', async (req, res) => {
-    const products = await productModel.find({});
-    res.render('layout', {products : products});
+    try {
+        const minPrice = parseFloat(req.query.minPrice) || 0; // Get minimum price from query parameters, default to 0 if not provided
+        const maxPrice = parseFloat(req.query.maxPrice) || Number.MAX_SAFE_INTEGER; // Get maximum price from query parameters, default to maximum safe integer if not provided
+        const searchQuery = req.query.searchQuery || ''; // Get search query from query parameters
+
+        // Create a filter object based on the provided criteria
+        const filter = {
+            price: { $gte: minPrice, $lte: maxPrice }, // Filter by price within the specified range
+            name: { $regex: new RegExp(searchQuery, 'i') }, // Case-insensitive search by product name
+        };
+
+        // Fetch products that match the filter criteria
+        const products = await productModel.find(filter);
+
+        // Render the page with the filtered products
+        res.render('layout', { products: products });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
+    }
 });
 
 // login route
@@ -136,9 +166,26 @@ app.get('/myaccount', isAuthenticated, (req, res) => {
     res.render('myaccount', { user: user });
 });
 
+// Change profile picture
+app.post('/change-profile-picture/:id', isAuthenticated, upload.single('image'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const userId = req.params.id;
+        const imageUrl = req.file.path;
+
+        await userModel.findByIdAndUpdate(userId, { profilePicture: imageUrl });
+
+        return res.redirect('/myaccount');
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 // Define the log-out route
 app.post('/logout', (req, res) => {
-// Log the user out by clearing the session
     req.logout((err) => {
         if (err) {
             console.error(err);
@@ -202,8 +249,12 @@ app.get('/cart', isAuthenticated, async (req, res) => {
     try {
         const user = req.user;
         const cartItems = await shoppingCartModel.find({ customer: user._id }).populate('product');
-        
-        res.render('cart', { user: user, cartItems: cartItems }); // Pass the array to the template
+        let total = 0;
+        cartItems.forEach(function(cartItem) {
+            total = total + cartItem.product.price;
+        }) 
+
+        res.render('cart', { user: user, cartItems: cartItems, total : total }); // Pass the array to the template
     } catch (e) {
         console.log(e);
         return res.send("An error has occurred");
@@ -231,7 +282,11 @@ app.post('/order', async (req, res) => {
         const user = req.user;
 
         // Find shopping cart items associated with the customer
-        const cartItems = await shoppingCartModel.find({ customer: user._id })
+        const cartItems = await shoppingCartModel.find({ customer: user._id }).populate('product');
+        let total = 0;
+        cartItems.forEach(function(cartItem) {
+            total = total + cartItem.product.price;
+        }) 
 
         // Create an array of product references from the shopping cart items
         const productRefs = cartItems.map(cartItem => ({ product: cartItem.product._id }));
@@ -242,6 +297,7 @@ app.post('/order', async (req, res) => {
         const newOrder = new orderModel({
             products: productRefs,
             customer: user._id,
+            total: total,
             hub: randomHub[0], // Assuming 'hubModel' returns a single hub document
         });
 
@@ -258,7 +314,6 @@ app.post('/order', async (req, res) => {
         return res.send("An error has occurred");
     }
 });
-
 
 
 // shipper route
@@ -301,18 +356,6 @@ app.get('/order/:id', isAuthenticated, async (req, res) => {
 app.get('/addproduct', isAuthenticated, (req, res) => {
     res.render('addproduct', { errors: [] });
 });
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {     
-        cb(null, "uploads")
-    },
-    filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        cb(null, file.fieldname + '-' + uniqueSuffix + ".png")
-    }
-})
-  
-const upload = multer({ storage: storage })
 
 app.post('/signup', upload.single('image'), async (req, res) => {
     const name = req.body.name;

@@ -114,6 +114,11 @@ const orderSchema = new mongoose.Schema({
         required: true,
     },
 
+    total: {
+        type: Number,
+        require: true,
+    },
+
     hub: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Hub",

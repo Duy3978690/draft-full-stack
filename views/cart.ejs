@@ -12,6 +12,7 @@
 </div>
 
 <% if (cartItems.length > 0) { %>
+    <p>total: <%= total %>$</p>
     <form action="/order" method="post">
         <button type="submit">Order</button>
     </form>

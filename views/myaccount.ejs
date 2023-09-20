@@ -1,5 +1,12 @@
-<img src="<%= user.profilePicture %>" alt=""><br>
-<%= user.username %>
+<img src="<%= user.profilePicture %>" alt="" width="200px"><br>
+
+<form action="/change-profile-picture/<%= user._id %>" method="post" enctype="multipart/form-data">
+    <label for="image">Change profile picture</label>
+    <input type="file" name="image" accept=".jpg, .jpeg, .png" required>
+    <button type="submit">Upload</button>
+</form>
+
+<div><%= user.username %></div>
 <form action="/logout" method="post">
     <button type="submit">Log Out</button>
 </form>
